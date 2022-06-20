@@ -10,15 +10,19 @@ Find the place near you.
 ### Move to local environment
 ### Before building, fetch everything from github
         git fetch --all
-        git pull --all
+        git pull
 this will get all the repo in your local machine.
+
+## create new issue in github
+
+then move to the local machine
 
 - create a new branch with the name of the issue
         
         git branch <issue-name>
 - Switch to the new branch
             
-        git checkout -b <issue-name>
+        git checkout <issue-name>
 - you can check which branch you are in
     
         git branch
