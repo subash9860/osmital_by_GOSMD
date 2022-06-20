@@ -1,4 +1,4 @@
-#Osmital app
+# Osmital app
 Find the place near you.
 
 # structure of project
