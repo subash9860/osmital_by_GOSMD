@@ -1,6 +1,5 @@
-# Osmital app
+# Osmital App
 Find the place near you.
 
-# structure of project
- backend(osmital-back)
- mobile(osmital-app)
+- backend(osmital-back)
+- mobile(osmital-app)
