@@ -1,7 +1,5 @@
-# Osmital app
+# Osmital App
 Find the place near you.
 
-# structure of project
- backend(osmital-back)
- mobile(osmital-app)
- front-end using flutter 
+- backend(osmital-back)
+- mobile(osmital-app)
