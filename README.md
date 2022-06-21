@@ -36,3 +36,7 @@ then move to the local machine
         git push origin <issue-name>
 
 ### then merge form github
+
+
+      
+          

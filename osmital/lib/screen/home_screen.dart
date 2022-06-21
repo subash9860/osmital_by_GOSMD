@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:osmital/screen/upload_image_screen.dart';
 import 'package:osmital/widget/bottom_modal_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -145,7 +146,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-          )
+          ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UploadImage()));
+              },
+              child: const Text("upload image"))
         ]),
       ),
     );
