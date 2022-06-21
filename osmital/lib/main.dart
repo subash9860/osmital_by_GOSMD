@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:osmital/widget/user_icon.dart';
 
 import 'screen/home_screen.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      home: const UserIcon(),
     );
   }
 }
