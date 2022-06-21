@@ -35,7 +35,13 @@ then move to the local machine
         git commit -m "message"
         git push origin <issue-name>
 
-### then merge form github
+### then merge form github 
+  or do localally :
+              git checkout main
+              git merge <issue_name >
+              git push origin main
+
+      
 
 
       

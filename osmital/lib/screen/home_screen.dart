@@ -7,6 +7,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:osmital/screen/upload_image_screen.dart';
 import 'package:osmital/widget/bottom_modal_sheet.dart';
+import 'package:osmital/widget/user_icon.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -95,17 +96,15 @@ class _HomeScreenState extends State<HomeScreen> {
               MarkerLayerOptions(
                 markers: [
                   Marker(
-                    width: 80.0,
-                    height: 80.0,
+                    width: 40.0,
+                    height: 50.0,
                     point: LatLng(
                       position?.latitude ?? 27,
                       position?.longitude ?? 54,
                     ),
-                    builder: (ctx) => const Icon(
-                      Icons.location_on,
-                      size: 30,
-                      color: Colors.red,
-                    ),
+                    builder: (ctx) => const UserIcon(),
+                    
+                    //  const UserIcon(),
                   ),
                 ],
               ),

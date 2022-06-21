@@ -120,7 +120,7 @@ class _UploadImageState extends State<UploadImage> {
                       SizedBox(
                         width: 20,
                       ),
-                      Text("upload image from cammera "),
+                      Text("upload image from camera "),
                     ],
                   )),
             ),
