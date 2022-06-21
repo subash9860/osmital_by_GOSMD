@@ -5,28 +5,20 @@ class UserIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(60.0),
-        child: GestureDetector(
-          onTap: () {},
-          child: Container(
-            height: 40,
-            width: 100,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black,
-                  offset: Offset(0, 2),
-                  blurRadius: 10.0,
-                )
-              ],
-              image:
-                  DecorationImage(image: AssetImage('./assets/user_icon.png')),
-            ),
-          ),
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black,
+              offset: Offset(0, 2),
+              blurRadius: 20.0,
+            )
+          ],
+          image: DecorationImage(image: AssetImage('./assets/user_icon.png')),
         ),
       ),
     );
