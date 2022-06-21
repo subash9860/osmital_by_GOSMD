@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:osmital/widget/user_icon.dart';
 
+import 'package:provider/provider.dart';
+
+import 'provider/osmital_data_provider.dart';
 import 'screen/home_screen.dart';
 
 void main() {
@@ -12,13 +15,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Osmital',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => OsmitalData(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Osmital',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const HomeScreen(),
       ),
-      home: const HomeScreen(),
     );
   }
 }
