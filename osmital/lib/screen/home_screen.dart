@@ -14,6 +14,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // for center of map
+  final MapController mapController = MapController();
+
   // position for lat and lng
   Position? position;
 
@@ -47,9 +50,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // get current location function get the current location of the device
   getCurrentLocation() async {
-    position = await Geolocator.getCurrentPosition(
+    Position newPosition = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );
+
+    setState(() {
+      position = newPosition;
+      mapController.move(LatLng(position!.latitude, position!.longitude), 15);
+    });
 
     // log is use only for printing in debuging mode.
     log("position: ${position.toString()}");
@@ -71,10 +79,11 @@ class _HomeScreenState extends State<HomeScreen> {
         child: const Icon(Icons.my_location_outlined),
       ),
       body: FlutterMap(
+        mapController: mapController,
         options: MapOptions(
           center: LatLng(
-            position?.latitude ?? 27.6731784,
-            position?.longitude ?? 85.408868,
+            position?.latitude ?? 26,
+            position?.longitude ?? 84,
           ),
           zoom: 5.0,
         ),
@@ -88,8 +97,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: 80.0,
                 height: 80.0,
                 point: LatLng(
-                  position?.latitude ?? 27.6731784,
-                  position?.longitude ?? 85.408868,
+                  position?.latitude ?? 26,
+                  position?.longitude ?? 84,
                 ),
                 builder: (ctx) => const Icon(
                   Icons.person,
