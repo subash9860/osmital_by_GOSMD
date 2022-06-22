@@ -21,7 +21,14 @@ class OsmitalData with ChangeNotifier {
     if (response.statusCode == 200) {
       log(response.body);
       final data = json.decode(response.body);
-      _items = data.map<Osmital>((json) => Osmital.fromJson(json)).toList();
+    // TODO: implement getOsmitalData
+      //
+      // _items = data.map<Osmital>((json) => Osmital.fromJson(json)).toList();
+      // _items = _items.add(
+      //   Osmital(
+      //     address: 
+      //   )
+      // );
       notifyListeners();
     } else {
       throw Exception('Failed to load data');

@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:osmital/screen/upload_image_screen.dart';
-import 'package:osmital/widget/bottom_modal_sheet.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/osmital_data_provider.dart';
+import '../screen/upload_image_screen.dart';
+import '../widget/bottom_modal_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -66,6 +69,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     getLocationPermission();
+    Provider.of<OsmitalData>(context, listen: false).getOsmitalData();
+    Provider.of<OsmitalData>(context, listen: false).items.forEach((element) {
+      log(element.toString());
+    });
     super.initState();
   }
 
@@ -76,6 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             getCurrentLocation();
+            
           },
           child: const Icon(Icons.my_location_outlined),
         ),
@@ -92,8 +100,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   urlTemplate:
                       "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                   subdomains: ['a', 'b', 'c']),
+
+              // ListView.builder(itemBuilder: itemBuilder),
+
               MarkerLayerOptions(
                 markers: [
+                  // this is the marker for the current location of User
                   Marker(
                     width: 80.0,
                     height: 80.0,
@@ -103,6 +115,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     builder: (ctx) => const Icon(
                       Icons.location_on,
+                      size: 30,
+                      color: Colors.red,
+                    ),
+                  ),
+                  Marker(
+                    width: 80.0,
+                    height: 80.0,
+                    point: LatLng(
+                      position?.latitude ?? 27,
+                      position?.longitude ?? 54,
+                    ),
+                    builder: (ctx) => const Icon(
+                      Icons.local_hospital,
                       size: 30,
                       color: Colors.red,
                     ),
