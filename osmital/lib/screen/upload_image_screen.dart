@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -36,99 +35,104 @@ class _UploadImageState extends State<UploadImage> {
     var size, height;
     size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(40.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(),
-                  hintText: 'Search  ',
-                ),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.green,
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              const Text(
+                "Send Accident Image to police station",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              "upload the image ",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 70,
-            ),
-            GestureDetector(
-              onTap: () {
-                get_image();
-              },
-              child: (image == null)
-                  ? Container(
-                      height: 200,
-                      width: 200,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black,
-                            offset: Offset(0, 2),
-                            blurRadius: 20.0,
-                          )
-                        ],
-                        image: DecorationImage(
-                            image: AssetImage('./assets/addimage.png')),
+              const SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: (image == null)
+                    ? Container(
+                        height: 300,
+                        width: 300,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black,
+                              offset: Offset(0, 1),
+                              blurRadius: 7.0,
+                            )
+                          ],
+                          image: DecorationImage(
+                              image: AssetImage('./assets/addimage.png')),
+                        ),
+                        child: Icon(
+                          Icons.add_a_photo,
+                          size: 80,
+                        ),
+                      )
+                    : Image(
+                        image: FileImage(File(image?.path ?? '')),
+                        height: 300,
+                        width: 300,
                       ),
-                    )
-                  : Image(
-                      image: FileImage(File(image?.path ?? '')),
-                      height: 300,
-                      width: 100,
-                    ),
-            ),
-            SizedBox(
-              width: 300,
-              child: ElevatedButton(
+              ),
+              const SizedBox(
+                height: 100,
+              ),
+              SizedBox(
+                width: 300,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: const Color.fromARGB(255, 246, 68, 68)),
+                    onPressed: () {
+                      get_image_from_gallary();
+                    },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.photo),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text("Select form gallary"),
+                      ],
+                    )),
+              ),
+              SizedBox(
+                width: 300,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: const Color.fromARGB(255, 246, 68, 68)),
+                    onPressed: () {
+                      get_image();
+                    },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.camera),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text("upload image from cammera "),
+                      ],
+                    )),
+              ),
+              SizedBox(
+                height: size.height / 10,
+              ),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(255, 246, 68, 68)),
                   onPressed: () {
-                    get_image_from_gallary();
+                  
                   },
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.photo),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text("upload image from gallary "),
-                    ],
-                  )),
-            ),
-            SizedBox(
-              width: 300,
-              child: ElevatedButton(
-                  onPressed: () {
-                    get_image();
-                  },
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.camera),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text("upload image from camera "),
-                    ],
-                  )),
-            ),
-            SizedBox(
-              height: size.height / 10,
-            ),
-            ElevatedButton(onPressed: () {}, child: const Text("upload "))
-          ],
+                  child: const Text("Send to police Station ", style: TextStyle(fontWeight: FontWeight.bold),))
+            ],
+          ),
         ),
       ),
     );
