@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:osmital/screen/about_page_screen.dart';
 import 'package:osmital/screen/emergency_screen.dart';
 import 'package:osmital/screen/home_screen.dart';
+import 'package:osmital/screen/test_screen.dart';
 import 'package:osmital/screen/upload_image_screen.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
@@ -16,15 +17,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const MyHomePage(),
-      debugShowCheckedModeBanner: false,
-      routes: {
-        "/home": (context) => const HomeScreen(),
-        "/AboutPage": (context) => const AboutPage(),
-        "/EmergencyPage": (context) => const EmergencyPage(),
-        "/UploadImage": (context) => const UploadImage(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => OsmitalData(),
+        ),
+      ],
+      child: MaterialApp(
+        home: const MyHomePage(),
+        debugShowCheckedModeBanner: false,
+        routes: {
+          "/home": (context) => const HomeScreen(),
+          "/AboutPage": (context) => const AboutPage(),
+          "/EmergencyPage": (context) => const EmergencyPage(),
+          "/UploadImage": (context) => const UploadImage(),
+        },
+      ),
     );
   }
 }

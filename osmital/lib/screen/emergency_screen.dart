@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:osmital/provider/osmital_data_provider.dart';
 import 'package:osmital/widget/bottom_modal_sheet.dart';
+import 'package:provider/provider.dart';
 
 class EmergencyPage extends StatefulWidget {
   const EmergencyPage({Key? key}) : super(key: key);
@@ -73,7 +77,8 @@ class _EmergencyPageState extends State<EmergencyPage> {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            getCurrentLocation();
+            Provider.of<OsmitalData>(context, listen: false).getOsmitalData();
+            // getCurrentLocation();
           },
           child: const Icon(Icons.my_location_outlined),
         ),
