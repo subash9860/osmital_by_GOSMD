@@ -9,7 +9,8 @@ class TestOutPut extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Consumer<OsmitalData>(
+        child: 
+        Consumer<OsmitalData>(
           builder: (context, osmitalData, _) => ListView.builder(
             itemBuilder: (context, index) => Column(
               children: [

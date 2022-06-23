@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:osmital/provider/location_permision.dart';
+import 'package:osmital/screen/hospital_screen.dart';
 import 'package:osmital/screen/map_screen.dart';
-import 'about_page_screen.dart';
-import 'emergency_screen.dart';
+import 'package:provider/provider.dart';
+import '../provider/osmital_data_provider.dart';
+// import './about_page_screen.dart';
+// import './emergency_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -10,10 +14,26 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-List screenList = <Widget>[const MapPage()];
-
 class _HomeScreenState extends State<HomeScreen> {
+  List screenList = const [
+    MapPage(),
+    HospitalScreen(),
+    Text("emergency"),
+  ];
   int currentIndex = 0;
+  @override
+  void initState() {
+    Provider.of<LocationProvider>(context, listen: false)
+        .getLocationPermission();
+    Provider.of<LocationProvider>(context, listen: false)
+        .getCurrentLocation()
+        .then((value) {
+      // Provider.of<OsmitalData>(context, listen: false)
+          // .postOsmitalData(27.14,85.32);
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

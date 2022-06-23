@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:osmital/provider/location_permision.dart';
 import 'package:osmital/screen/about_page_screen.dart';
 import 'package:osmital/screen/emergency_screen.dart';
 import 'package:osmital/screen/home_screen.dart';
@@ -10,7 +11,7 @@ import 'package:provider/provider.dart';
 import 'provider/osmital_data_provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +22,12 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          lazy: false,
           create: (_) => OsmitalData(),
+        ),
+        ChangeNotifierProvider(
+          lazy: false,
+          create: (_) => LocationProvider(),
         ),
       ],
       child: MaterialApp(
@@ -29,7 +35,8 @@ class MyApp extends StatelessWidget {
         routes: {
           // "/home": (context) => const HomeScreen(),
           // "/": (context) => const MapPage(),
-          "/": (context) => HomeScreen(),
+          // "/": (context) => TestScreen(),
+          "/": (context) => const HomeScreen(),
           "/AboutPage": (context) => const AboutPage(),
           "/EmergencyPage": (context) => const EmergencyPage(),
           "/UploadImage": (context) => const UploadImage(),

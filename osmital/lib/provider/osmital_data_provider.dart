@@ -6,10 +6,11 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../model/osmital_model.dart';
 
-const url = 'http://192.168.1.212:7778/distance';
+// http://172.19.101.234:7778/distance
+const url = 'http://172.19.101.234:7778/distance';
 
 class OsmitalData with ChangeNotifier {
-  List<Osmital> _items = [];
+  final List<Osmital> _items = [];
   List<Osmital> get items => [..._items];
 
   Future<void> getOsmitalData() async {
@@ -21,10 +22,9 @@ class OsmitalData with ChangeNotifier {
     log(response.statusCode.toString());
 
     if (response.statusCode == 200) {
-      log(response.body);
-      final data = json.decode(response.body)['file'];
+      // final data = json.decode(response.body)['file'];
       // _items = data.map<Osmital>((json) => Osmital.fromJson(json)).toList();
-      // notifyListeners();
+      notifyListeners();
     } else {
       throw Exception('Failed to load data');
     }
@@ -40,10 +40,10 @@ class OsmitalData with ChangeNotifier {
         'lat': lat,
       }),
     );
-    // log(response.statusCode.toString());
-    // log(response.body);
+    log(response.statusCode.toString());
+    log(response.body);
     if (response.statusCode == 200) {
-      // log(response.body);
+      log(response.body);
       // final Map<String, dynamic>
 
       final data = json.decode(response.body);
@@ -53,7 +53,7 @@ class OsmitalData with ChangeNotifier {
       // log(data['file']);
 
       final data2 = jsonDecode(data['file']) as Map<String, dynamic>;
-      print(data2.runtimeType.toString());
+      // print(data2.runtimeType.toString());
 
       final map = Map<String, dynamic>.from(data2);
 
@@ -105,6 +105,8 @@ class OsmitalData with ChangeNotifier {
           wheelchair: properties['wheelchair'] ?? 'not added',
         ));
 
+        notifyListeners();
+
         // log('Name: ${properties['name']}');
 
         // log(geometry['coordinates']);
@@ -147,7 +149,7 @@ class OsmitalData with ChangeNotifier {
 
       // log(data['file']['features'][0]['properties']['name']);
       // _items = data.map<Osmital>((json) => Osmital.fromJson(json)).toList();
-      // notifyListeners();
+      notifyListeners();
     } else {
       throw Exception('Failed to load data');
     }
