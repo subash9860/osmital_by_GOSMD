@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:osmital/screen/map_screen.dart';
 import 'about_page_screen.dart';
 import 'emergency_screen.dart';
 
@@ -9,15 +10,10 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  List<Color> colors = [
-    Colors.redAccent,
-    Colors.green,
-    Colors.blueAccent,
-    Colors.red
-  ];
-  List text = ["Emergency", "Inform-Police", "bla bla bla", "bla bla bla"];
+List screenList = <Widget>[const MapPage()];
 
+class _HomeScreenState extends State<HomeScreen> {
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,7 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(
           appBar: AppBar(
             elevation: 3,
-            backgroundColor: Colors.green,
+            foregroundColor: Colors.blue,
+            backgroundColor: Colors.white,
             title: const Text(
               "OSMital",
               style: TextStyle(
@@ -68,128 +65,28 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          body: Padding(
-            padding: const EdgeInsets.only(top: 50.0, left: 10, right: 10),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 90,
-                  child: Center(
-                    child: Card(
-                      elevation: 1,
-                      child: Text(
-                        '\"Everyone don\'t know every hospital but OSMital knows\"',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: 500,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: GridView(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2),
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/EmergencyPage");
-                        },
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          elevation: 4,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: colors[0],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                                child: Text(
-                              text[0],
-                              style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            )),
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/UploadImage");
-                        },
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          elevation: 4,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: colors[1],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                                child: Text(
-                              text[1],
-                              style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            )),
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          //TODO:Adding navigator
-                        },
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          elevation: 4,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: colors[2],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                                child: Text(
-                              text[2],
-                              style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            )),
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          //TODO:Adding navigator
-                        },
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          elevation: 4,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: colors[3],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                                child: Text(
-                              text[3],
-                              style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            )),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
+          body: screenList[currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: currentIndex,
+            onTap: (value) {
+              setState(() {
+                currentIndex = value;
+              });
+            },
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.map),
+                label: 'Map',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.local_hospital_sharp),
+                label: 'Hospital',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.ring_volume),
+                label: 'Emergency',
+              ),
+            ],
           ),
         ),
       ),
