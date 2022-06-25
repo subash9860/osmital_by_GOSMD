@@ -18,7 +18,8 @@ class UserIcon extends StatelessWidget {
               blurRadius: 20.0,
             )
           ],
-          image: DecorationImage(image: AssetImage('./assets/user_icon.png')),
+          image: DecorationImage(
+              image: AssetImage('./Assets/Images/user_icon.png')),
         ),
       ),
     );

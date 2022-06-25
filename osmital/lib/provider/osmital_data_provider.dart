@@ -20,6 +20,7 @@ class OsmitalData with ChangeNotifier {
       ),
     );
     log(response.statusCode.toString());
+    log(response.body);
 
     if (response.statusCode == 200) {
       // final data = json.decode(response.body)['file'];
@@ -88,21 +89,21 @@ class OsmitalData with ChangeNotifier {
 
         _items.add(Osmital(
           name: properties['name'],
-          address: properties['address'] ?? 'not added',
-          phone: properties['phone'] ?? 'not added',
-          email: properties['email'] ?? 'not added',
-          website: properties['website'] ?? 'not added',
-          description: properties['description'] ?? 'not added',
+          address: properties['address'] ?? 'not added in osm',
+          phone: properties['phone'] ?? 'not added in osm',
+          email: properties['email'] ?? 'not added in osm',
+          website: properties['website'] ?? 'not added in osm',
+          description: properties['description'] ?? 'not added in osm',
           lat: lat.toString(),
           lng: lng.toString(),
-          beds: properties['beds'] ?? 'not added',
-          capacityBeds: properties['capacityBeds'] ?? 'not added',
-          emergency: properties['emergency'] ?? 'not added',
-          icu: properties['icu'] ?? 'not added',
-          operationTheatre: properties['operationTheatre'] ?? 'not added',
-          ventilator: properties['ventilator'] ?? 'not added',
-          xray: properties['xray'] ?? 'not added',
-          wheelchair: properties['wheelchair'] ?? 'not added',
+          beds: properties['beds'] ?? 'not added in osm',
+          capacityBeds: properties['capacityBeds'] ?? 'not added in osm',
+          emergency: properties['emergency'] ?? 'not added osm',
+          icu: properties['icu'] ?? 'not added in osm',
+          operationTheatre: properties['operationTheatre'] ?? 'not added in osm',
+          ventilator: properties['ventilator'] ?? 'not added in osm',
+          xray: properties['xray'] ?? 'not added in osm',
+          wheelchair: properties['wheelchair'] ?? 'not added in osm',
         ));
 
         notifyListeners();
