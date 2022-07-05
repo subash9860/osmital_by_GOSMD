@@ -1,0 +1,140 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.osmital"
+4    android:versionCode="4001"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="32" />
+9-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:3:5-66
+11-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:3:22-64
+12    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+12-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:4:5-79
+12-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:4:22-76
+13    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+13-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:5:1-77
+13-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:5:18-74
+14    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+14-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:6:1-81
+14-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:6:18-78
+15    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+15-->[:geolocator_android] /home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-77
+15-->[:geolocator_android] /home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:9:22-74
+16
+17    <application
+18        android:name="android.app.Application"
+18-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:9:9-42
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.6.0] /home/subash/.gradle/caches/transforms-3/acbce933e4b464a5224ed377a62db1f5/transformed/core-1.6.0/AndroidManifest.xml:24:18-86
+20        android:icon="@mipmap/ic_launcher"
+20-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:10:9-43
+21        android:label="OSMital" >
+21-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:8:9-32
+22        <activity
+22-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:11:9-31:20
+23            android:name="com.example.osmital.MainActivity"
+23-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:12:13-41
+24            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+24-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:16:13-163
+25            android:exported="true"
+25-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:13:13-36
+26            android:hardwareAccelerated="true"
+26-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:17:13-47
+27            android:launchMode="singleTop"
+27-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:14:13-43
+28            android:theme="@style/LaunchTheme"
+28-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:15:13-47
+29            android:windowSoftInputMode="adjustResize" >
+29-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:18:13-55
+30
+31            <!--
+32                 Specifies an Android theme to apply to this Activity as soon as
+33                 the Android process has started. This theme is visible to the user
+34                 while the Flutter UI initializes. After that, this theme continues
+35                 to determine the Window background behind the Flutter UI.
+36            -->
+37            <meta-data
+37-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:23:13-26:17
+38                android:name="io.flutter.embedding.android.NormalTheme"
+38-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:24:15-70
+39                android:resource="@style/NormalTheme" />
+39-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:25:15-52
+40
+41            <intent-filter>
+41-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:27:13-30:29
+42                <action android:name="android.intent.action.MAIN" />
+42-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:28:17-68
+42-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:28:25-66
+43
+44                <category android:name="android.intent.category.LAUNCHER" />
+44-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:29:17-76
+44-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:29:27-74
+45            </intent-filter>
+46        </activity>
+47        <!--
+48             Don't delete the meta-data below.
+49             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+50        -->
+51        <meta-data
+51-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:34:9-36:33
+52            android:name="flutterEmbedding"
+52-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:35:13-44
+53            android:value="2" />
+53-->/home/subash/StudioProjects/osmital_by_GOSMD/osmital/android/app/src/main/AndroidManifest.xml:36:13-30
+54
+55        <service
+55-->[:geolocator_android] /home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:9-16:56
+56            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+56-->[:geolocator_android] /home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-77
+57            android:enabled="true"
+57-->[:geolocator_android] /home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-35
+58            android:exported="false"
+58-->[:geolocator_android] /home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-37
+59            android:foregroundServiceType="location" />
+59-->[:geolocator_android] /home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:13-53
+60
+61        <activity
+61-->[:url_launcher_android] /home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-13:74
+62            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+62-->[:url_launcher_android] /home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-74
+63            android:exported="false"
+63-->[:url_launcher_android] /home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-37
+64            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+64-->[:url_launcher_android] /home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-71
+65
+66        <uses-library
+66-->[androidx.window:window:1.0.0-beta04] /home/subash/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+67            android:name="androidx.window.extensions"
+67-->[androidx.window:window:1.0.0-beta04] /home/subash/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+68            android:required="false" />
+68-->[androidx.window:window:1.0.0-beta04] /home/subash/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+69        <uses-library
+69-->[androidx.window:window:1.0.0-beta04] /home/subash/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+70            android:name="androidx.window.sidecar"
+70-->[androidx.window:window:1.0.0-beta04] /home/subash/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+71            android:required="false" />
+71-->[androidx.window:window:1.0.0-beta04] /home/subash/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+72
+73        <activity
+73-->[com.google.android.gms:play-services-base:17.0.0] /home/subash/.gradle/caches/transforms-3/1ea967b797818d9badf6aaa0240ca184/transformed/jetified-play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
+74            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+74-->[com.google.android.gms:play-services-base:17.0.0] /home/subash/.gradle/caches/transforms-3/1ea967b797818d9badf6aaa0240ca184/transformed/jetified-play-services-base-17.0.0/AndroidManifest.xml:24:13-79
+75            android:exported="false"
+75-->[com.google.android.gms:play-services-base:17.0.0] /home/subash/.gradle/caches/transforms-3/1ea967b797818d9badf6aaa0240ca184/transformed/jetified-play-services-base-17.0.0/AndroidManifest.xml:25:13-37
+76            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+76-->[com.google.android.gms:play-services-base:17.0.0] /home/subash/.gradle/caches/transforms-3/1ea967b797818d9badf6aaa0240ca184/transformed/jetified-play-services-base-17.0.0/AndroidManifest.xml:26:13-72
+77
+78        <meta-data
+78-->[com.google.android.gms:play-services-basement:17.0.0] /home/subash/.gradle/caches/transforms-3/4ef803ba34d31dcf48df123a27eb5d76/transformed/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
+79            android:name="com.google.android.gms.version"
+79-->[com.google.android.gms:play-services-basement:17.0.0] /home/subash/.gradle/caches/transforms-3/4ef803ba34d31dcf48df123a27eb5d76/transformed/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
+80            android:value="@integer/google_play_services_version" />
+80-->[com.google.android.gms:play-services-basement:17.0.0] /home/subash/.gradle/caches/transforms-3/4ef803ba34d31dcf48df123a27eb5d76/transformed/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
+81    </application>
+82
+83</manifest>

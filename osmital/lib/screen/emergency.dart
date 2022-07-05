@@ -1,14 +1,15 @@
-// ignore_for_file: prefer_const_constructors
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:osmital/provider/osmital_data_provider.dart';
-import 'package:osmital/widget/bottom_modal_sheet.dart';
-import 'package:osmital/widget/user_icon.dart';
 import 'package:provider/provider.dart';
+
+import '../provider/osmital_data_provider.dart';
+import '../widget/bottom_modal_sheet.dart';
+import '../widget/user_icon.dart';
 
 class EmergencyPage extends StatefulWidget {
   const EmergencyPage({Key? key}) : super(key: key);
@@ -17,59 +18,31 @@ class EmergencyPage extends StatefulWidget {
   State<EmergencyPage> createState() => _EmergencyPageState();
 }
 
-getLocationPermission() async {
-  bool serviceEnabled;
-  LocationPermission permission;
-  // if location services are enabled.
-  serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  if (!serviceEnabled) {
-    // Location services are not enabled don't continue
-    // accessing the position and request users of the
-    // App to enable the location services.
-    return Future.error('Location services are disabled.');
-  }
-
-  permission = await Geolocator.checkPermission();
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      return Future.error('Location permissions are denied');
-    }
-  }
-
-  if (permission == LocationPermission.deniedForever) {
-    // Permissions are denied forever, handle appropriately.
-    return Future.error(
-        'Location permissions are permanently denied, we cannot request permissions.');
-  }
-}
-
 class _EmergencyPageState extends State<EmergencyPage> {
-  // position for lat and lng
-  Position? position;
   final MapController mapController = MapController();
 
-  // get Location Permission function ask for permission to access location data from the device
+  bool _isLoading = true;
 
-  // get current location function get the current location of the device
-  getCurrentLocation() async {
-    // ignore: non_constant_identifier_names
-    Position newPosition = await Geolocator.getCurrentPosition(
+  late Position position;
+
+  Future getCurrentLocation() async {
+    position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );
-    setState(() {
-      position = newPosition;
-      mapController.move(LatLng(position!.latitude, position!.longitude), 15);
-    });
-
-    // log is use only for printing in debuging mode.
-    // log("position: ${position.toString()}");
+    log(position.toString());
   }
 
   @override
   void initState() {
-    getLocationPermission();
-    getCurrentLocation();
+    getCurrentLocation().then((_) {
+      Provider.of<OsmitalData>(context, listen: false)
+          .postOsmitalData(position.longitude, position.latitude)
+          .then((value) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    });
     super.initState();
   }
 
@@ -77,224 +50,193 @@ class _EmergencyPageState extends State<EmergencyPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // floatingActionButton: FloatingActionButton(
-        //   backgroundColor: Colors.green,
-        //   onPressed: () {
-        //     getCurrentLocation();
-
-        //     Provider.of<OsmitalData>(context, listen: false).getOsmitalData();
-        //   },
-        //   child: const Icon(Icons.my_location_outlined,),
-        // ),
-        body: Stack(children: [
-          FlutterMap(
-            mapController: mapController,
-            options: MapOptions(
-              center:
-                  LatLng(position?.latitude ?? 27, position?.longitude ?? 84),
-              zoom: 5.0,
-            ),
-            layers: [
-              TileLayerOptions(
-                  urlTemplate:
-                      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                  subdomains: ['a', 'b', 'c']),
-              MarkerLayerOptions(
-                markers: [
-                  Marker(
-                    // width: 80.0,
-                    // height: 80.0,
-                    point: LatLng(
-                        position?.latitude ?? 27, position?.longitude ?? 84),
-                    //  LatLng(27.77477, 85.36005),
-                    builder: (ctx) => UserIcon(),
-                    // const Icon(
-                    //   Icons.location_on,
-                    //   color: Colors.blue,
-                    // ),
+        body: (_isLoading)
+            ? const Center(child: CircularProgressIndicator())
+            : Stack(
+                children: [
+                  FlutterMap(
+                    mapController: mapController,
+                    options: MapOptions(
+                      center: LatLng(position.latitude, position.longitude),
+                      zoom: 10.0,
+                    ),
+                    layers: [
+                      TileLayerOptions(
+                          urlTemplate:
+                              "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                          subdomains: ['a', 'b', 'c']),
+                      MarkerLayerOptions(
+                        markers: [
+                          Marker(
+                            point:
+                                LatLng(position.latitude, position.longitude),
+                            builder: (ctx) => const UserIcon(),
+                          ),
+                          if (Provider.of<OsmitalData>(context).itemCount != 0)
+                            Marker(
+                              width: 50.0,
+                              height: 50.0,
+                              point: LatLng(
+                                double.parse(Provider.of<OsmitalData>(context)
+                                    .items[0]
+                                    .lat),
+                                double.parse(
+                                  Provider.of<OsmitalData>(context)
+                                      .items[0]
+                                      .lng,
+                                ),
+                              ),
+                              builder: (ctx) => Card(
+                                  color: Colors.grey[300],
+                                  child: Text(
+                                    Provider.of<OsmitalData>(context)
+                                        .items[0]
+                                        .name,
+                                    style: const TextStyle(
+                                        color: Colors.black54, fontSize: 10),
+                                  )),
+                            ),
+                          if (Provider.of<OsmitalData>(context).itemCount != 0)
+                            Marker(
+                              width: 50.0,
+                              height: 60.0,
+                              point: LatLng(
+                                double.parse(Provider.of<OsmitalData>(context)
+                                    .items[1]
+                                    .lat),
+                                double.parse(
+                                  Provider.of<OsmitalData>(context)
+                                      .items[1]
+                                      .lng,
+                                ),
+                              ),
+                              builder: (ctx) => Card(
+                                  color: Colors.grey[300],
+                                  child: Text(
+                                    Provider.of<OsmitalData>(context)
+                                        .items[1]
+                                        .name,
+                                    style: const TextStyle(
+                                        color: Colors.black54, fontSize: 10),
+                                  )),
+                            ),
+                          if (Provider.of<OsmitalData>(context).itemCount != 0)
+                            Marker(
+                              width: 50.0,
+                              height: 60.0,
+                              point: LatLng(
+                                double.parse(Provider.of<OsmitalData>(context)
+                                    .items[2]
+                                    .lat),
+                                double.parse(
+                                  Provider.of<OsmitalData>(context)
+                                      .items[2]
+                                      .lng,
+                                ),
+                              ),
+                              builder: (ctx) => Card(
+                                  color: Colors.grey[300],
+                                  child: Text(
+                                    Provider.of<OsmitalData>(context)
+                                        .items[2]
+                                        .name,
+                                    style: const TextStyle(
+                                        color: Colors.black54, fontSize: 10),
+                                  )),
+                            ),
+                          if (Provider.of<OsmitalData>(context).itemCount != 0)
+                            Marker(
+                              width: 50.0,
+                              height: 60.0,
+                              point: LatLng(
+                                double.parse(Provider.of<OsmitalData>(context)
+                                    .items[3]
+                                    .lat),
+                                double.parse(
+                                  Provider.of<OsmitalData>(context)
+                                      .items[3]
+                                      .lng,
+                                ),
+                              ),
+                              builder: (ctx) => Card(
+                                  color: Colors.grey[300],
+                                  child: Text(
+                                    Provider.of<OsmitalData>(context,
+                                            listen: false)
+                                        .items[3]
+                                        .name,
+                                    style: const TextStyle(
+                                        color: Colors.black54, fontSize: 10),
+                                  )),
+                            ),
+                          if (Provider.of<OsmitalData>(context).itemCount != 0)
+                            Marker(
+                              width: 50.0,
+                              height: 60.0,
+                              point: LatLng(
+                                double.parse(Provider.of<OsmitalData>(context)
+                                    .items[4]
+                                    .lat),
+                                double.parse(
+                                  Provider.of<OsmitalData>(context)
+                                      .items[4]
+                                      .lng,
+                                ),
+                              ),
+                              builder: (ctx) => Card(
+                                  color: Colors.grey[300],
+                                  child: Text(
+                                    Provider.of<OsmitalData>(context)
+                                        .items[4]
+                                        .name,
+                                    style: const TextStyle(
+                                        color: Colors.black54, fontSize: 10),
+                                  )),
+                            ),
+                        ],
+                      ),
+                    ],
                   ),
-                  Marker(
-                    width: 50.0,
-                    height: 50.0,
-                    point:
-                        // lat
-                        LatLng(
-                      double.parse(
-                          Provider.of<OsmitalData>(context, listen: false)
-                              .items[0]
-                              .lat),
-                      double.parse(
-                        Provider.of<OsmitalData>(context, listen: false)
-                            .items[0]
-                            .lng,
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 60, right: 60, top: 40),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            if (Provider.of<OsmitalData>(context).itemCount !=
+                                0) {
+                              newMethod(context);
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                              fixedSize: const Size(120, 40),
+                              elevation: 5,
+                              primary: Colors.redAccent),
+                          child: const Text(
+                            "Emergency",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (Provider.of<OsmitalData>(context).itemCount == 0)
+                    const Positioned(
+                      bottom: 0,
+                      child: Card(
+                        color: Colors.red,
+                        child: Text(
+                          "Hospitals around are not listed in OSM \n or unable to fetch data from server",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
                       ),
                     ),
-                    // LatLng(27.7719452, 85.3579758),
-
-                    builder: (ctx) => Card(
-                        color: Theme.of(context).primaryColor,
-                        child: Text(
-                          Provider.of<OsmitalData>(context, listen: false)
-                              .items[0]
-                              .name,
-                          style: TextStyle(color: Colors.white, fontSize: 10),
-                        )),
-                  ),
-                  // Marker(
-                  //   width: 50.0,
-                  //   height: 60.0,
-                  //   point: P
-                  // LatLng(27.75161, 85.36255),
-                  //   builder: (ctx) => const Card(
-                  //       color: Colors.green,
-                  //       child: Text(
-                  //         "Karuna Hospital",
-                  //         style: TextStyle(color: Colors.black),
-                  //       )),
-                  // ),
-                  Marker(
-                    width: 50.0,
-                    height: 60.0,
-                    point:
-                        //  LatLng(27.7768822, 85.3585746),
-                        LatLng(
-                      double.parse(
-                          Provider.of<OsmitalData>(context, listen: false)
-                              .items[1]
-                              .lat),
-                      double.parse(
-                        Provider.of<OsmitalData>(context, listen: false)
-                            .items[1]
-                            .lng,
-                      ),
-                    ),
-                    builder: (ctx) =>Card(
-                        color: Theme.of(context).primaryColor,
-                        child: Text(
-                          // "Budhanilkantha Medical Center",
-                          Provider.of<OsmitalData>(context, listen: false)
-                              .items[1]
-                              .name,
-                          style: TextStyle(color: Colors.white, fontSize: 10),
-                        )),
-                  ),
-                  Marker(
-                    width: 50.0,
-                    height: 60.0,
-                    point:
-                    //  LatLng(27.766421, 85.354599),
-                        LatLng(
-                      double.parse(
-                          Provider.of<OsmitalData>(context, listen: false)
-                              .items[2]
-                              .lat),
-                      double.parse(
-                        Provider.of<OsmitalData>(context, listen: false)
-                            .items[2]
-                            .lng,
-                      ),
-                    ),
-                    builder: (ctx) => Card(
-                        color: Theme.of(context).primaryColor,
-                        child: Text(
-                          // "Budhanilkantha Health Post",
-                          Provider.of<OsmitalData>(context, listen: false)
-                              .items[2]
-                              .name,
-                          style: TextStyle(color: Colors.white, fontSize: 10),
-                        )),
-                  ),
-                  Marker(
-                    width: 50.0,
-                    height: 60.0,
-                    point: 
-                    // LatLng(27.74897, 85.34603),
-                        LatLng(
-                      double.parse(
-                          Provider.of<OsmitalData>(context, listen: false)
-                              .items[3]
-                              .lat),
-                      double.parse(
-                        Provider.of<OsmitalData>(context, listen: false)
-                            .items[3]
-                            .lng,
-                      ),
-                    ),
-                    builder: (ctx) => Card(
-                        color: Theme.of(context).primaryColor,
-                        child: Text(
-                          // "Neuro Hospital",
-                          Provider.of<OsmitalData>(context, listen: false)
-                              .items[3]
-                              .name,
-                          style: TextStyle(color: Colors.white, fontSize: 10),
-                        )),
-                  ),
-                  Marker(
-                    width: 50.0,
-                    height: 60.0,
-                    point:
-                    //  LatLng(27.74544, 85.34264),
-                        LatLng(
-                      double.parse(
-                          Provider.of<OsmitalData>(context, listen: false)
-                              .items[4]
-                              .lat),
-                      double.parse(
-                        Provider.of<OsmitalData>(context, listen: false)
-                            .items[4]
-                            .lng,
-                      ),
-                    ),
-                    builder: (ctx) => Card(
-                        color: Theme.of(context).primaryColor,
-                        child: Text(
-                          // "Shahid Gangalal National Heart Center",
-                          Provider.of<OsmitalData>(context, listen: false)
-                              .items[4]
-                              .name,
-                          style: TextStyle(color: Colors.white, fontSize: 10),
-                        )),
-                  ),
                 ],
               ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 60, right: 60, top: 40),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    newMethod(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(120, 40),
-                      elevation: 5,
-                      primary: Colors.redAccent),
-                  child: const Text(
-                    "Emergency",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                // ElevatedButton(
-                //   onPressed: () {
-                //     newMethod(context);
-                //   },
-                //   style: ElevatedButton.styleFrom(
-                //       fixedSize: Size(120, 40),
-                //       elevation: 5,
-                //       primary: Colors.green),
-                //   child: const Text(
-                //     "Normal",
-                //     style: TextStyle(fontWeight: FontWeight.bold),
-                //   ),
-                // ),
-              ],
-            ),
-          )
-        ]),
       ),
     );
   }

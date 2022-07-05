@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/image_picker_android/intermediates/incremental/mergeReleaseResources/merged.dir/values-fi/values-fi.xml",
+            "map": [
+                {
+                    "source": "/home/subash/.gradle/caches/transforms-3/d363e3b5616f580c766e3e2b3c05f27d/transformed/core-1.8.0/res/values-fi/values-fi.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/image_picker_android/intermediates/merged_res/release/values-fi/values-fi.xml",
+            "map": [
+                {
+                    "source": "/home/subash/.gradle/caches/transforms-3/d363e3b5616f580c766e3e2b3c05f27d/transformed/core-1.8.0/res/values-fi/values-fi.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}

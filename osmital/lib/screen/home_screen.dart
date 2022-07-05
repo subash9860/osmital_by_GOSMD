@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:osmital/provider/location_permision.dart';
-import 'package:osmital/screen/hospital_screen.dart';
-import 'package:osmital/screen/map_screen.dart';
-import 'package:osmital/screen/test_screen.dart';
-import 'package:provider/provider.dart';
 
+import '../screen/map_screen.dart';
+import '../screen/test_screen.dart';
 import 'emergency.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,19 +13,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List page = [
-    MapScreen(),
-    EmergencyPage(),
-    TestScreen(),
+    const MapScreen(),
+    const EmergencyPage(),
+    const TestScreen(),
   ];
   int pageIndex = 0;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    Provider.of<LocationProvider>(context, listen: false)
-        .getLocationPermission();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

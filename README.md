@@ -1,6 +1,18 @@
+
+
 # Osmital App
 Find the place near you.
 
+
+
+## Download and install
+1. [click here to download arm64-v8a ](./osmital/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk)
+2. [click here to download armeabi-v7a ](./osmital/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk)
+3. [click here to download x86 ](./osmital/build/app/outputs/flutter-apk/app-x86_64-release.apk)
+
+
+
+### Structure of the app
 - backend(osmital-back)
 - mobile(osmital-app)
   

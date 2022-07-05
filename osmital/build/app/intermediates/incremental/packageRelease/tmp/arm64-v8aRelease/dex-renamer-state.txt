@@ -1,0 +1,4 @@
+#Tue Jul 05 07:00:38 NPT 2022
+base.0=/home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

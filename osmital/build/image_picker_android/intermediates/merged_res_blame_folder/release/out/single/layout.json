@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/image_picker_android/intermediates/merged_res/release/layout/notification_template_icon_group.xml",
+        "source": "/home/subash/.gradle/caches/transforms-3/d363e3b5616f580c766e3e2b3c05f27d/transformed/core-1.8.0/res/layout/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/image_picker_android/intermediates/merged_res/release/layout/notification_action_tombstone.xml",
+        "source": "/home/subash/.gradle/caches/transforms-3/d363e3b5616f580c766e3e2b3c05f27d/transformed/core-1.8.0/res/layout/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/image_picker_android/intermediates/merged_res/release/layout/custom_dialog.xml",
+        "source": "/home/subash/.gradle/caches/transforms-3/d363e3b5616f580c766e3e2b3c05f27d/transformed/core-1.8.0/res/layout/custom_dialog.xml"
+    },
+    {
+        "merged": "/home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/image_picker_android/intermediates/merged_res/release/layout/notification_action.xml",
+        "source": "/home/subash/.gradle/caches/transforms-3/d363e3b5616f580c766e3e2b3c05f27d/transformed/core-1.8.0/res/layout/notification_action.xml"
+    },
+    {
+        "merged": "/home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/image_picker_android/intermediates/merged_res/release/layout/notification_template_part_chronometer.xml",
+        "source": "/home/subash/.gradle/caches/transforms-3/d363e3b5616f580c766e3e2b3c05f27d/transformed/core-1.8.0/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/home/subash/StudioProjects/osmital_by_GOSMD/osmital/build/image_picker_android/intermediates/merged_res/release/layout/notification_template_part_time.xml",
+        "source": "/home/subash/.gradle/caches/transforms-3/d363e3b5616f580c766e3e2b3c05f27d/transformed/core-1.8.0/res/layout/notification_template_part_time.xml"
+    }
+]
