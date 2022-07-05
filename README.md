@@ -6,7 +6,7 @@ Find the place near you.
 
 
 ## Download and install
-1. [click here to download arm64-v8a ](https://subash9860.github.io/osmital_by_GOSMD/blob/main/osmital/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk)
+1. [click here to download arm64-v8a ](https://github.com/subash9860/osmital_by_GOSMD/raw/main/osmital/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk)
 2. [click here to download armeabi-v7a ](./osmital/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk)
 3. [click here to download x86 ](./osmital/build/app/outputs/flutter-apk/app-x86_64-release.apk)
 
